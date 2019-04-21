@@ -1,1 +1,1 @@
-stack build && stack exec -- chip8-exe
+stack build && stack exec -- hchip8-exe

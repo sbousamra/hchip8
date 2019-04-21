@@ -1,14 +1,12 @@
 name:                hchip8
 version:             0.1.0.0
-github:              "githubuser/hchip8"
+github:              "sbousamra/hchip8"
 license:             BSD3
-author:              "Author name here"
-maintainer:          "example@example.com"
-copyright:           "2019 Author name here"
+author:              "Sebastian Bou-Samra"
+copyright:           "2019 Sebastian Bou-Samra"
 
 extra-source-files:
 - README.md
-- ChangeLog.md
 
 # Metadata used when publishing your package
 # synopsis:            Short description of your package
