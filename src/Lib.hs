@@ -43,13 +43,13 @@ spawn = Chip8 {
 
 cls :: Chip8 -> Chip8
 cls chip8 = chip8 {
-  pc = pc chip8 + 2,
+  pc = pc chip8 + 1,
   s = [[]]
 }
 
 ret :: Chip8 -> Chip8
 ret chip8 = chip8 {
-  pc = ((stack chip8)!!(sp chip8)) + 2,
+  pc = ((stack chip8)!!(sp chip8)) + 1,
   sp = sp chip8 - 1
 }
 
