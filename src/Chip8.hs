@@ -1,4 +1,4 @@
-module Lib
+module Chip8
     ( Chip8 (..)
     , Opcode (..)
     , spawn
@@ -17,10 +17,10 @@ data Chip8 = Chip8 {
   stack :: [Word16],
   v :: [Word16],
   i :: Word16,
-  st :: Word16,
-  dt :: Word16,
-  ki :: [Word16],
-  s :: [[Word16]]
+  soundTimer :: Word16,
+  delayTimer :: Word16,
+  keyboardInput :: [Word16],
+  screen :: [[Word16]]
 } deriving (Eq, Show)
 
 data Opcode
@@ -35,20 +35,20 @@ spawn = Chip8 {
   stack = [0],
   v = [],
   i = 0x0,
-  st = 0,
-  dt = 0,
-  ki = [],
-  s = [[]]
+  soundTimer = 0,
+  delayTimer = 0,
+  keyboardInput = [],
+  screen = [[]]
 }
 
 cls :: Chip8 -> Chip8
 cls chip8 = chip8 {
-  s = [[]]
+  screen = [[]]
 }
 
 ret :: Chip8 -> Chip8
 ret chip8 = chip8 {
-  pc = ((stack chip8)!!(sp chip8)),
+  pc = stack chip8 !! sp chip8,
   sp = sp chip8 - 1
 }
 
