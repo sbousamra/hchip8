@@ -109,6 +109,5 @@ start romName = do
   let chip8 = create {
     memory = rom
   }
-  print chip8
   emulate chip8
 
