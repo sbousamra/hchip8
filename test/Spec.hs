@@ -9,11 +9,11 @@ tests :: TestTree
 tests = testGroup "Tests" [opcodeTests]
 
 opcodeTests :: TestTree
-opcodeTests = testGroup "Opcode Tests" [clsTest, retTest]
+opcodeTests = testGroup "Opcode Tests" [clsTest, retTest, jpTest]
 
 clsTest :: TestTree
 clsTest = testCase "CLS" $ do
-  let chip8 = spawn {
+  let chip8 = create {
     screen = [[1, 2, 3]]
   }
   let expected = chip8 {
@@ -24,14 +24,23 @@ clsTest = testCase "CLS" $ do
 
 retTest :: TestTree
 retTest = testCase "RET" $ do
-  let chip8 = spawn {
+  let chip8 = create {
     stack = [1, 2],
-    sp = 1,
-    pc = 0
+    stackPointer = 1,
+    programCounter = 0
   }
   let expected = chip8 {
-    sp = 0,
-    pc = 2
+    stackPointer = 0,
+    programCounter = 2
   }
   let actual = ret chip8
+  expected @=? actual
+
+jpTest :: TestTree
+jpTest = testCase "JP" $ do
+  let chip8 = create
+  let expected = chip8 {
+    programCounter = 0x234
+  }
+  let actual = jp chip8 0x1234
   expected @=? actual
