@@ -13,34 +13,36 @@ opcodeTests = testGroup "Opcode Tests" [clsTest, retTest, jpTest]
 
 clsTest :: TestTree
 clsTest = testCase "CLS" $ do
-  let chip8 = create {
+  let subject = create {
+    programCounter = 0,
     screen = [[1, 2, 3]]
   }
-  let expected = chip8 {
+  let expected = subject {
+    programCounter = 2,
     screen = [[]]
   }
-  let actual = cls chip8
+  let actual = cls subject
   expected @=? actual
 
 retTest :: TestTree
 retTest = testCase "RET" $ do
-  let chip8 = create {
+  let subject = create {
     stack = [1, 2],
     stackPointer = 1,
     programCounter = 0
   }
-  let expected = chip8 {
+  let expected = subject {
     stackPointer = 0,
     programCounter = 2
   }
-  let actual = ret chip8
+  let actual = ret subject
   expected @=? actual
 
 jpTest :: TestTree
 jpTest = testCase "JP" $ do
-  let chip8 = create
-  let expected = chip8 {
+  let subject = create
+  let expected = subject {
     programCounter = 0x234
   }
-  let actual = jp chip8 0x1234
+  let actual = jp subject 0x1234
   expected @=? actual

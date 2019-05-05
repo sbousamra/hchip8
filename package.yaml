@@ -33,6 +33,8 @@ executables:
     - -with-rtsopts=-N
     dependencies:
     - hchip8
+    - bytestring
+    - directory
 
 tests:
   hchip8-test:
