@@ -11,10 +11,8 @@ module Chip8
   ) where
 
 import Data.Bits
-import Data.ByteString as BS
 import Data.List (genericIndex)
 import Data.Word
-import System.Directory
 
 {-|
   All data types, function definitions and implementations are based on
@@ -22,8 +20,7 @@ import System.Directory
   and http://mattmik.com/files/chip8/mastering/chip8.html.
 -}
 
-type RomPath = String
-type RomName = String
+type Rom = [Word8]
 
 data Chip8 = Chip8 {
   memory         :: [Word8],
@@ -117,22 +114,16 @@ executeOpcode chip8 opcode = case opcode of
   RET    -> ret chip8
   JP nnn -> jp chip8 nnn
 
-step :: Chip8 -> IO ()
+step :: Chip8 -> Chip8
 step chip8 = do
   let opcode = fromIntegral (memory chip8 `genericIndex` programCounter chip8 - 1)
         .|. fromIntegral (memory chip8 `genericIndex` programCounter chip8)
   let decodedOpcode = decodeOpcode opcode
   step (executeOpcode chip8 decodedOpcode)
 
-readRom :: RomPath -> IO [Word8]
-readRom romPath = do
-  byteString <- BS.readFile romPath
-  pure (BS.unpack byteString)
-
-start :: RomName -> IO ()
-start romName = do
-  dir <- getCurrentDirectory
-  rom <- readRom (dir ++ "/roms/" ++ romName)
+-- Forgotten how to do inline variable binding
+start :: Rom -> Chip8
+start rom = do
   let chip8 = create {
     memory = rom
   }
