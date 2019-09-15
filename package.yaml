@@ -1,32 +1,28 @@
-name:                hchip8
-version:             0.1.0.0
-github:              "sbousamra/hchip8"
-license:             BSD3
-author:              "Sebastian Bou-Samra"
-copyright:           "2019 Sebastian Bou-Samra"
+name: hchip8
+version: 0.1.0.0
+github: "sbousamra/hchip8"
+license: BSD3
+author: "Sebastian Bou-Samra"
+copyright: "2019 Sebastian Bou-Samra"
 
 extra-source-files:
 - README.md
 
-# Metadata used when publishing your package
-# synopsis:            Short description of your package
-# category:            Web
-
-# To avoid duplicated efforts in documentation and dealing with the
-# complications of embedding Haddock markup inside cabal files, it is
-# common to point users to the README.md file.
-description:         Please see the README on GitHub at <https://github.com/githubuser/hchip8#readme>
+description: Please see the README on GitHub at <https://github.com/githubuser/hchip8#readme>
 
 dependencies:
 - base >= 4.7 && < 5
 
 library:
   source-dirs: src
+  dependencies:
+    - bytestring
+    - directory
 
 executables:
   hchip8-exe:
-    main:                Main.hs
-    source-dirs:         app
+    main: Main.hs
+    source-dirs: app
     ghc-options:
     - -threaded
     - -rtsopts
@@ -38,8 +34,8 @@ executables:
 
 tests:
   hchip8-test:
-    main:                Spec.hs
-    source-dirs:         test
+    main: Spec.hs
+    source-dirs: test
     ghc-options:
     - -threaded
     - -rtsopts
